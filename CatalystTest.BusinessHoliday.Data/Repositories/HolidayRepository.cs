@@ -14,6 +14,14 @@ namespace CatalystTest.BusinessHoliday.Data.Repositories
 
         public int CalculateWorkingDays(DateTime startDate, DateTime endDate)
         {
+            var holidays = 0;
+
+            while (startDate.Date <= endDate.Date)
+            {
+                if (startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday)
+                    holidays++;
+                startDate = startDate.AddDays(1);
+            }
             throw new NotImplementedException();
         }
 

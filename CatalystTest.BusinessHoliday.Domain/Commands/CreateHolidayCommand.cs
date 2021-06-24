@@ -8,13 +8,11 @@ namespace CatalystTest.BusinessHoliday.Domain.Commands
     {
         public CreateHolidayCommand() { }
         public CreateHolidayCommand(
-            Guid id,
             DateTime fromDate,
             DateTime toDate,
             string holidayOccasion,
             bool active)
         {
-            Id = id;
             FromDate = fromDate;
             ToDate = toDate;
             HolidayOccasion = holidayOccasion;

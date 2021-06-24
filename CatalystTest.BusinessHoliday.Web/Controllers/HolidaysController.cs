@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using CatalystTest.BusinessHoliday.Domain;
+using CatalystTest.BusinessHoliday.Domain.Commands;
 using CatalystTest.BusinessHoliday.Domain.Entities;
 using CatalystTest.BusinessHoliday.Domain.Interfaces.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,11 +21,13 @@ namespace CatalystTest.BusinessHoliday.Web.Controllers
         private readonly IMediator _mediator;
         private readonly IHolidayRepository _holidayRepository;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public HolidaysController(
             IMediator mediator,
             IHolidayRepository holidayRepository,
-            IMapper mapper)
+            IMapper mapper,
+            IHttpContextAccessor httpContextAccessor)
         {
             _mediator = mediator
                 ?? throw new ArgumentNullException(nameof(mediator));
@@ -30,6 +35,8 @@ namespace CatalystTest.BusinessHoliday.Web.Controllers
                 ?? throw new ArgumentNullException(nameof(holidayRepository));
             _mapper = mapper
                 ?? throw new ArgumentNullException(nameof(mapper));
+            _httpContextAccessor = httpContextAccessor
+                ?? throw new ArgumentNullException(nameof(httpContextAccessor));
         }
 
         // GET: Holidays
@@ -67,15 +74,10 @@ namespace CatalystTest.BusinessHoliday.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,HolidayOccasion,FromDate,ToDate,Active")] Holiday holiday)
+        public async Task<IActionResult> Create(CreateHolidayCommand request)
         {
-            if (ModelState.IsValid)
-            {
-                holiday.Id = Guid.NewGuid();
-                await _holidayRepository.Add(holiday);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(holiday);
+            var result = await _mediator.Send(request);
+            return Result(request, result);
         }
 
         // GET: Holidays/Edit/5
@@ -91,7 +93,8 @@ namespace CatalystTest.BusinessHoliday.Web.Controllers
             {
                 return NotFound();
             }
-            return View(holiday);
+            var command = _mapper.Map<UpdateHolidayCommand>(holiday);
+            return View(command);
         }
 
         // POST: Holidays/Edit/5
@@ -99,33 +102,10 @@ namespace CatalystTest.BusinessHoliday.Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,HolidayOccasion,FromDate,ToDate,Active")] Holiday holiday)
+        public async Task<IActionResult> Edit(UpdateHolidayCommand request)
         {
-            if (id != holiday.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    await _holidayRepository.Update(holiday);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!HolidayExists(holiday.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(holiday);
+            var result = await _mediator.Send(request);
+            return Result(request, result);
         }
 
         // GET: Holidays/Delete/5
@@ -150,12 +130,22 @@ namespace CatalystTest.BusinessHoliday.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var holiday = await _holidayRepository.GetById(id);
-            await _holidayRepository.Remove(holiday);
-            return RedirectToAction(nameof(Index));
+            var request = new DeleteHolidayCommand(id);
+            var result = await _mediator.Send(request);
+            return Result(request, result);
         }
 
         private bool HolidayExists(Guid id) =>
             _holidayRepository.HolidayExists(id);
+
+        private IActionResult Result(HolidayCommand request, Result result)
+        {
+            if (result.HasErrors)
+            {
+                result.Errors.ToList().ForEach(err => ModelState.AddModelError(string.Empty, err));
+                return View(request);
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

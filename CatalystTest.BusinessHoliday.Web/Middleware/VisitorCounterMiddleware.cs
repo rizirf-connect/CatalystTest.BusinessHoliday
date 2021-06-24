@@ -17,19 +17,17 @@ namespace CatalystTest.BusinessHoliday.Web.Middleware
 
         public async Task Invoke(HttpContext context)
         {
-            string visitorId = context.Request.Cookies["VisitorId"];
-            if (visitorId == null)
+            var path = context.Request.Path;
+            var user = context.User;
+            if (path.HasValue && path.Value == "/Holidays")
             {
-                //don the necessary staffs here to save the count by one
-
-                context.Response.Cookies.Append("VisitorId", Guid.NewGuid().ToString(), new CookieOptions()
-                {
-                    Path = "/",
-                    HttpOnly = true,
-                    Secure = false,
-                });
+                //context.Response.Cookies.Append("HolidayPageCount", pageCount.ToString(), new CookieOptions()
+                //{
+                //    Path = "/",
+                //    HttpOnly = true,
+                //    Secure = false,
+                //});
             }
-
             await _requestDelegate(context);
         }
     }

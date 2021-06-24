@@ -14,14 +14,13 @@ namespace CatalystTest.BusinessHoliday.Domain.Commands
         public string HolidayOccasion { get; set; }
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
-        public bool Active { get; set; }
+        public bool Active { get; set; } = false;
 
         public ValidationResult ValidationResult { get; set; }
 
         public virtual bool IsValid()
         {
             var validation = new HolidayValidation();
-            validation.ValidateId();
             validation.ValidateOccasion();
             validation.ValidateFromDate();
             validation.ValidateToDate();
