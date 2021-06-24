@@ -19,7 +19,7 @@ namespace CatalystTest.BusinessHoliday.Domain.Validations
             RuleFor(h => h.HolidayOccasion)
                 .NotEmpty().WithMessage("The Holiday Occasion cannot be empty.")
                 .MaximumLength(10).WithMessage("The Holiday Occasion cannot be greater than 10 characters.")
-                .Matches("/^[A-Z][a-z0-9_-]{3,19}$/").WithMessage("First letter of Holiday Occasion is always capital.");
+                .Matches("^[A-Z][A-Za-z0-9_-]{0,9}$").WithMessage("First letter of Holiday Occasion is always capital And length between 0 - 10 characters long.");
         }
 
         public void ValidateFromDate()
