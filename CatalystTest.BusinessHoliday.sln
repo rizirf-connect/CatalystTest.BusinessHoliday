@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalystTest.BusinessHoliday.Web", "CatalystTest.BusinessHoliday.Web\CatalystTest.BusinessHoliday.Web.csproj", "{53021E16-502F-4ECC-93DC-28DDB0FFD52B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalystTest.BusinessHoliday.Data", "CatalystTest.BusinessHoliday.Data\CatalystTest.BusinessHoliday.Data.csproj", "{2CD03252-7FD4-4EEB-99D9-F2578CC02A5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalystTest.BusinessHoliday.Application", "CatalystTest.BusinessHoliday.Application\CatalystTest.BusinessHoliday.Application.csproj", "{1A9259E4-C4EE-4161-9EF1-29BE3F380E78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalystTest.BusinessHoliday.Domain", "CatalystTest.BusinessHoliday.Domain\CatalystTest.BusinessHoliday.Domain.csproj", "{E3D0C571-455A-4279-9E55-23E50AD3DF76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalystTest.BusinessHoliday.IoC", "CatalystTest.BusinessHoliday.IoC\CatalystTest.BusinessHoliday.IoC.csproj", "{55A68FA3-D874-4B19-B256-812F215AE6C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53021E16-502F-4ECC-93DC-28DDB0FFD52B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53021E16-502F-4ECC-93DC-28DDB0FFD52B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53021E16-502F-4ECC-93DC-28DDB0FFD52B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53021E16-502F-4ECC-93DC-28DDB0FFD52B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CD03252-7FD4-4EEB-99D9-F2578CC02A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CD03252-7FD4-4EEB-99D9-F2578CC02A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CD03252-7FD4-4EEB-99D9-F2578CC02A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CD03252-7FD4-4EEB-99D9-F2578CC02A5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A9259E4-C4EE-4161-9EF1-29BE3F380E78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A9259E4-C4EE-4161-9EF1-29BE3F380E78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A9259E4-C4EE-4161-9EF1-29BE3F380E78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A9259E4-C4EE-4161-9EF1-29BE3F380E78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3D0C571-455A-4279-9E55-23E50AD3DF76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3D0C571-455A-4279-9E55-23E50AD3DF76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3D0C571-455A-4279-9E55-23E50AD3DF76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3D0C571-455A-4279-9E55-23E50AD3DF76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55A68FA3-D874-4B19-B256-812F215AE6C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55A68FA3-D874-4B19-B256-812F215AE6C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55A68FA3-D874-4B19-B256-812F215AE6C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55A68FA3-D874-4B19-B256-812F215AE6C1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D89C9018-172D-43AC-B569-4C1B96C19C72}
+	EndGlobalSection
+EndGlobal

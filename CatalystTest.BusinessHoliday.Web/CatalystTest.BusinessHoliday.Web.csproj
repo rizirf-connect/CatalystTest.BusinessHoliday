@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>aspnet-CatalystTest.BusinessHoliday.Web-203691B8-D976-4B91-B869-610FC7DD564D</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CatalystTest.BusinessHoliday.Application\CatalystTest.BusinessHoliday.Application.csproj" />
+    <ProjectReference Include="..\CatalystTest.BusinessHoliday.Data\CatalystTest.BusinessHoliday.Data.csproj" />
+    <ProjectReference Include="..\CatalystTest.BusinessHoliday.Domain\CatalystTest.BusinessHoliday.Domain.csproj" />
+    <ProjectReference Include="..\CatalystTest.BusinessHoliday.IoC\CatalystTest.BusinessHoliday.IoC.csproj" />
+  </ItemGroup>
+
+</Project>
