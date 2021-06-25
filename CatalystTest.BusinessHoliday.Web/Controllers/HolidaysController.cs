@@ -3,6 +3,7 @@ using CatalystTest.BusinessHoliday.Domain;
 using CatalystTest.BusinessHoliday.Domain.Commands;
 using CatalystTest.BusinessHoliday.Domain.Entities;
 using CatalystTest.BusinessHoliday.Domain.Interfaces.Repositories;
+using CatalystTest.BusinessHoliday.Web.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -37,6 +38,27 @@ namespace CatalystTest.BusinessHoliday.Web.Controllers
                 ?? throw new ArgumentNullException(nameof(mapper));
             _httpContextAccessor = httpContextAccessor
                 ?? throw new ArgumentNullException(nameof(httpContextAccessor));
+        }
+
+        // GET: Holidays/WorkingDays
+        public IActionResult WorkingDays()
+        {
+            ViewData["WorkingDays"] = 0;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> WorkingDays(CheckWorkingDaysViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ViewData["WorkingDays"] = await _holidayRepository.CalculateWorkingDays(model.StartDate, model.EndDate);
+                return View();
+            }
+
+            ViewData["WorkingDays"] = 0;
+            return View();
         }
 
         // GET: Holidays

@@ -18,5 +18,7 @@ namespace CatalystTest.BusinessHoliday.Domain
 
         public void AddErrors(IEnumerable<string> errors) =>
             _errors.AddRange(errors);
+
+
     }
 }

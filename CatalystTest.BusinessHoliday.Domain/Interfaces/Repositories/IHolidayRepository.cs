@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CatalystTest.BusinessHoliday.Domain.Interfaces.Repositories
 {
     public interface IHolidayRepository : IBaseRepository<Holiday>
     {
         bool HolidayExists(Guid id);
-        int CalculateWorkingDays(DateTime startDate, DateTime endDate);
+        Task<int> CalculateWorkingDays(DateTime startDate, DateTime endDate);
     }
 }

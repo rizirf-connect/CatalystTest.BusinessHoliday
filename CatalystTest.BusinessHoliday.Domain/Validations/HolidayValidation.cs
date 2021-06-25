@@ -31,6 +31,7 @@ namespace CatalystTest.BusinessHoliday.Domain.Validations
         public void ValidateToDate()
         {
             RuleFor(h => h.ToDate)
+                .GreaterThan(h => h.FromDate).WithMessage("ToDate should not be less than FromDate.")
                 .NotEmpty().WithMessage("The To Date cannot be empty.");
         }
 

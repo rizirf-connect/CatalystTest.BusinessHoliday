@@ -104,6 +104,7 @@ namespace CatalystTest.BusinessHoliday.Domain.Commands
 
             return result;
         }
+
     }
 }
 
