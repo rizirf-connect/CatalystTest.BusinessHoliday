@@ -8,6 +8,8 @@ namespace CatalystTest.BusinessHoliday.Web.Middleware
 {
     public class VisitorCounterMiddleware
     {
+        private const string SESSION_KEY = "PageCount";
+        private const string HOLIDAY_PATH = "/Holidays";
         private readonly RequestDelegate _requestDelegate;
 
         public VisitorCounterMiddleware(RequestDelegate requestDelegate)
@@ -18,15 +20,17 @@ namespace CatalystTest.BusinessHoliday.Web.Middleware
         public async Task Invoke(HttpContext context)
         {
             var path = context.Request.Path;
-            var user = context.User;
-            if (path.HasValue && path.Value == "/Holidays")
+            if (path.HasValue && path.Value == HOLIDAY_PATH)
             {
-                //context.Response.Cookies.Append("HolidayPageCount", pageCount.ToString(), new CookieOptions()
-                //{
-                //    Path = "/",
-                //    HttpOnly = true,
-                //    Secure = false,
-                //});
+                if (!context.Session.Keys.Contains(SESSION_KEY))
+                {
+                    context.Session.SetInt32(SESSION_KEY, 1);
+                }
+                else
+                {
+                    var prevValue = context.Session.GetInt32(SESSION_KEY).Value;
+                    context.Session.SetInt32(SESSION_KEY, prevValue + 1);
+                }
             }
             await _requestDelegate(context);
         }

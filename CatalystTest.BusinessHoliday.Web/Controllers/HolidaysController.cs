@@ -19,6 +19,8 @@ namespace CatalystTest.BusinessHoliday.Web.Controllers
     [Authorize]
     public class HolidaysController : Controller
     {
+        private const string SESSION_KEY = "PageCount";
+        private const string DAYS_KEY = "WorkingDays";
         private readonly IMediator _mediator;
         private readonly IHolidayRepository _holidayRepository;
         private readonly IMapper _mapper;
@@ -43,7 +45,7 @@ namespace CatalystTest.BusinessHoliday.Web.Controllers
         // GET: Holidays/WorkingDays
         public IActionResult WorkingDays()
         {
-            ViewData["WorkingDays"] = 0;
+            ViewData[DAYS_KEY] = 0;
             return View();
         }
 
@@ -53,11 +55,11 @@ namespace CatalystTest.BusinessHoliday.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                ViewData["WorkingDays"] = await _holidayRepository.CalculateWorkingDays(model.StartDate, model.EndDate);
+                ViewData[DAYS_KEY] = await _holidayRepository.CalculateWorkingDays(model.StartDate, model.EndDate);
                 return View();
             }
 
-            ViewData["WorkingDays"] = 0;
+            ViewData[DAYS_KEY] = 0;
             return View();
         }
 
@@ -65,6 +67,7 @@ namespace CatalystTest.BusinessHoliday.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var holidays = await _holidayRepository.GetAll();
+            ViewData[SESSION_KEY] = _httpContextAccessor.HttpContext.Session.GetInt32(SESSION_KEY);
             return View(holidays);
         }
 

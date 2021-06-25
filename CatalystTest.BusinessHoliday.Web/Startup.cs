@@ -31,9 +31,11 @@ namespace CatalystTest.BusinessHoliday.Web
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<BusinessHolidayContext>();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddSessionStateTempDataProvider();
             services.AddAutoMapperSetup();
             services.AddMediatRSetup();
+            services.AddSession();
 
             NativeInjectorConfig.RegisterServices(services);
         }
@@ -52,11 +54,17 @@ namespace CatalystTest.BusinessHoliday.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseMiddleware(typeof(VisitorCounterMiddleware));
-            app.UseRouting();
+            
+            app.UseSession();
 
+            app.UseHttpsRedirection();
+            
+            app.UseStaticFiles();
+            
+            app.UseMiddleware(typeof(VisitorCounterMiddleware));
+            
+            app.UseRouting();
+            
             app.UseAuthentication();
             app.UseAuthorization();
 
