@@ -4,14 +4,16 @@ using CatalystTest.BusinessHoliday.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CatalystTest.BusinessHoliday.Data.Migrations
 {
     [DbContext(typeof(BusinessHolidayContext))]
-    partial class BusinessHolidayContextModelSnapshot : ModelSnapshot
+    [Migration("20210625155415_CorrectSeedData")]
+    partial class CorrectSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
